@@ -1,4 +1,4 @@
-NUMBER=25
+NUMBER=19
 
 if [ $NUMBER -gt 20 ]; then
     echo "Given number is larger than 20"
