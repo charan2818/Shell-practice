@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "All args passeed to script: $@"
+#### Special Variables ####
+echo "All args passed to script: $@"
 echo "Number of vars passed to script: $#"
 echo "Script Name: $0"
 echo "Present Directory: $PWD"
