@@ -20,11 +20,9 @@ VALIDATE(){
     
 }
 
-dnf install nginx -y &>> $LOGS_FILE
-VALIDATE $? "Installing Nginx"
-
-dnf install mysql -y &>> $LOGS_FILE
-VALIDATE $? "Installing MySQL"
-
-dnf install nodejs -y &>> $LOGS_FILE
-VALIDATE $? "Installing Nodejs"
+for package in $@
+do 
+ dnf install $package -y &>>LOGS_FILE
+ VALIDATE $? "$package installation"
+ fi
+done

@@ -20,11 +20,14 @@ VALIDATE(){
     
 }
 
-dnf install nginx -y &>> $LOGS_FILE
-VALIDATE $? "Installing Nginx"
-
-dnf install mysql -y &>> $LOGS_FILE
-VALIDATE $? "Installing MySQL"
-
-dnf install nodejs -y &>> $LOGS_FILE
-VALIDATE $? "Installing Nodejs"
+for package in $@
+do 
+ dnf list installed $package &>>LOGS_FILE
+ if [ $? -ne 0 ]; then 
+    echo "$package not installed, installing now"
+    dnf install $package -y &>>LOGS_FILE
+    VALIDATE $? "$package installation"
+ else
+    echo "$package already installed, skipping"
+ fi
+done
